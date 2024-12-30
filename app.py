@@ -77,25 +77,29 @@ with col2:
     st.markdown("<div class='stHeader'><h2>📅 Calendario y Mini Apps</h2></div>", unsafe_allow_html=True)
     
     # Calendario mejorado
+    events = [
+        {
+            "title": "Evento de ejemplo",
+            "start": datetime.datetime.now().strftime("%Y-%m-%d"),
+            "backgroundColor": "#7CB9E8"
+        }
+    ]
+    
     calendar_options = {
         "headerToolbar": {
             "left": "prev,next today",
             "center": "title",
-            "right": "dayGridMonth,timeGridWeek,timeGridDay",
+            "right": "dayGridMonth"
         },
         "initialView": "dayGridMonth",
         "selectable": True,
-        "events": [
-            {
-                "title": "Evento de ejemplo",
-                "start": datetime.datetime.now().strftime("%Y-%m-%d"),
-                "backgroundColor": "#7CB9E8",
-            }
-        ],
-        "themeSystem": "bootstrap",
+        "events": events
     }
 
-    calendar(calendar_options=calendar_options)
+    try:
+        calendar(events=events, options=calendar_options)
+    except Exception as e:
+        st.error(f"Error al cargar el calendario: {str(e)}")
 
     # Mini Apps con diseño mejorado
     st.markdown("---")
